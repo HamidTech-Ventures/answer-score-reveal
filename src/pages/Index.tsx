@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import Signup from '@/components/auth/Signup';
 import Dashboard from '@/components/Dashboard';
 import Quiz from '@/components/Quiz';
 import Results from '@/components/Results';
+import Footer from '@/components/Footer';
 
 export interface User {
   id: string;
@@ -57,47 +57,50 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl mx-auto animate-fade-in">
-        {currentView === 'login' && (
-          <Login 
-            onLogin={handleLogin} 
-            onSwitchToSignup={() => setCurrentView('signup')} 
-          />
-        )}
-        
-        {currentView === 'signup' && (
-          <Signup 
-            onSignup={handleSignup} 
-            onSwitchToLogin={() => setCurrentView('login')} 
-          />
-        )}
-        
-        {currentView === 'dashboard' && user && (
-          <Dashboard 
-            user={user} 
-            onStartQuiz={handleStartQuiz}
-            onLogout={handleLogout}
-          />
-        )}
-        
-        {currentView === 'quiz' && user && (
-          <Quiz 
-            user={user} 
-            onQuizComplete={handleQuizComplete}
-            onBackToDashboard={handleBackToDashboard}
-          />
-        )}
-        
-        {currentView === 'results' && user && quizResult && (
-          <Results 
-            user={user}
-            result={quizResult}
-            onBackToDashboard={handleBackToDashboard}
-            onRetakeQuiz={handleStartQuiz}
-          />
-        )}
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex flex-col">
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-6xl mx-auto animate-fade-in">
+          {currentView === 'login' && (
+            <Login 
+              onLogin={handleLogin} 
+              onSwitchToSignup={() => setCurrentView('signup')} 
+            />
+          )}
+          
+          {currentView === 'signup' && (
+            <Signup 
+              onSignup={handleSignup} 
+              onSwitchToLogin={() => setCurrentView('login')} 
+            />
+          )}
+          
+          {currentView === 'dashboard' && user && (
+            <Dashboard 
+              user={user} 
+              onStartQuiz={handleStartQuiz}
+              onLogout={handleLogout}
+            />
+          )}
+          
+          {currentView === 'quiz' && user && (
+            <Quiz 
+              user={user} 
+              onQuizComplete={handleQuizComplete}
+              onBackToDashboard={handleBackToDashboard}
+            />
+          )}
+          
+          {currentView === 'results' && user && quizResult && (
+            <Results 
+              user={user}
+              result={quizResult}
+              onBackToDashboard={handleBackToDashboard}
+              onRetakeQuiz={handleStartQuiz}
+            />
+          )}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
